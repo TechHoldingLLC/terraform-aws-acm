@@ -34,3 +34,8 @@ No modules.
 |------|-------------|
 | <a name="output_acm_arn"></a> [acm\_arn](#output\_acm\_arn) | n/a |
 | <a name="output_acm_domain_validation_options"></a> [acm\_domain\_validation\_options](#output\_acm\_domain\_validation\_options) | n/a |
+
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/TechHoldingLLC/terraform-aws-acm/blob/main/LICENSE) for full details.
