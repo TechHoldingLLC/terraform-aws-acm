@@ -32,9 +32,10 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_acm_arn"></a> [acm\_arn](#output\_acm\_arn) | n/a |
-| <a name="output_acm_domain_validation_options"></a> [acm\_domain\_validation\_options](#output\_acm\_domain\_validation\_options) | n/a |
-
+| <a name="output_arn"></a> [arn](#output\_arn) | n/a |
+| <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name) | n/a |
+| <a name="output_domain_validation_options"></a> [domain\_validation\_options](#output\_domain\_validation\_options) | n/a |
+| <a name="output_subject_alternative_names"></a> [subject\_alternative\_names](#output\_subject\_alternative\_names) | n/a |
 
 ## License
 
