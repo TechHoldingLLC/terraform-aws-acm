@@ -14,3 +14,9 @@ variable "subject_alternative_names" {
   type        = list(any)
   default     = []
 }
+
+variable "key_algorithm" {
+  description = "Algorithm used for encryption"
+  type        = string
+  default     = "RSA_2048"
+}
