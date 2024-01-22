@@ -24,19 +24,17 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name to crate cert for | `string` | n/a | yes |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 zone id | `string` | `""` | no |
-| <a name="input_subject_alternative_names"></a> [subject\_alternative\_names](#input\_subject\_alternative\_names) | Alternative domains to use | `list(any)` | `[]` | no |
+| <a name="input_domains"></a> [domain\_list](#input\_domain\_list) | List of domain for ACM certificate for non Route53 Hosted zones | `list(string)` | `[]` | no |
+| <a name="input_domain_config"></a> [domain\_map](#input\_domain\_map) | Map of domain names and hosted zone IDs for Route53 Hosted zones | `list(any)` | `[]` | no |
+| <a name="input_key_algorithm"></a> [key\_algorithm](#input\_key\_algorithm) | Algorithm used for encryption | `string` | `"RSA_2048"` | no |
+| <a name="input_validation_method"></a> [validation\_method](#input\_validation\_method) | Validation method for ACM certificate | `string` | `"DNS"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_arn"></a> [arn](#output\_arn) | n/a |
+| <a name="output_acm_arn"></a> [acm\_arn](#output\_acm\_arn) | n/a |
+| <a name="output_acm_domain_validation_options"></a> [acm\_domain\_validation\_options](#output\_acm\_domain\_validation\_options) | n/a |
 | <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name) | n/a |
-| <a name="output_domain_validation_options"></a> [domain\_validation\_options](#output\_domain\_validation\_options) | n/a |
 | <a name="output_subject_alternative_names"></a> [subject\_alternative\_names](#output\_subject\_alternative\_names) | n/a |
-
-## License
-
-Apache 2 Licensed. See [LICENSE](https://github.com/TechHoldingLLC/terraform-aws-acm/blob/main/LICENSE) for full details.
+| <a name="output_validation_record_fqdns"></a> [validation\_record\_fqdns](#output\_validation\_record\_fqdns) | n/a |
