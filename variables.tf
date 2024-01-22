@@ -5,13 +5,13 @@ variable "key_algorithm" {
 }
 
 variable "domain_config" {
-  description = "Map of domain names and the hosted zone IDs"
+  description = "Map of domain names and the hosted zone IDs for Route53 Hosted zones"
   type        = list(any)
   default     = []
 }
 
 variable "domains" {
-  description = "List of domain for ACM certificate"
+  description = "List of domain for ACM certificate for non Route53 Hosted zones"
   type        = list(string)
   default     = []
 }

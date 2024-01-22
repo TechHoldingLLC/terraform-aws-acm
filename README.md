@@ -24,8 +24,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domains"></a> [domain\_list](#input\_domain\_list) | List of domain for ACM certificate | `list(string)` | `[]` | no |
-| <a name="input_domain_config"></a> [domain\_map](#input\_domain\_map) | Map of domain names and hosted zone IDs | `list(any)` | `[]` | no |
+| <a name="input_domains"></a> [domain\_list](#input\_domain\_list) | List of domain for ACM certificate for non Route53 Hosted zones | `list(string)` | `[]` | no |
+| <a name="input_domain_config"></a> [domain\_map](#input\_domain\_map) | Map of domain names and hosted zone IDs for Route53 Hosted zones | `list(any)` | `[]` | no |
 | <a name="input_key_algorithm"></a> [key\_algorithm](#input\_key\_algorithm) | Algorithm used for encryption | `string` | `"RSA_2048"` | no |
 | <a name="input_validation_method"></a> [validation\_method](#input\_validation\_method) | Validation method for ACM certificate | `string` | `"DNS"` | no |
 
