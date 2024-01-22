@@ -1,27 +1,49 @@
+###############
+# acm/acm.tf #
+###############
+
+## ACM certificate
 resource "aws_acm_certificate" "cert" {
-  domain_name               = var.domain_name
-  validation_method         = "DNS"
-  subject_alternative_names = var.subject_alternative_names
+  domain_name               = local.domain_name
+  validation_method         = var.validation_method
+  subject_alternative_names = local.subject_alternative_names
   key_algorithm             = var.key_algorithm
+
   lifecycle {
     create_before_destroy = true
-    prevent_destroy       = true
   }
 }
 
+## Creating Route53 records for all the domains in ACM certificate
 resource "aws_route53_record" "dns" {
-  count   = length(var.route53_zone_id) > 0 ? length(concat([var.domain_name], var.subject_alternative_names)) : 0
-  name    = aws_acm_certificate.cert.domain_validation_options.*.resource_record_name[count.index]
-  type    = aws_acm_certificate.cert.domain_validation_options.*.resource_record_type[count.index]
-  zone_id = var.route53_zone_id
-  records = [
-    aws_acm_certificate.cert.domain_validation_options.*.resource_record_value[count.index]
+  for_each = length(var.domain_config) > 0 ? {
+    for option in aws_acm_certificate.cert.domain_validation_options : option.domain_name => {
+      name        = option.resource_record_name
+      record      = option.resource_record_value
+      type        = option.resource_record_type
+      domain_name = option.domain_name
+    }
+  } : {}
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 300
+  type            = each.value.type
+  zone_id         = [for record in var.domain_config : record.hosted_zone_id if contains(record.domain_name, each.value.domain_name)][0]
+
+  depends_on = [
+    aws_acm_certificate.cert
   ]
-  ttl = 300
 }
 
+## DNS validation for ACM certificate
 resource "aws_acm_certificate_validation" "validation" {
-  count                   = length(var.route53_zone_id) > 0 ? 1 : 0
+  count                   = length(var.domain_config) > 0 ? 1 : 0
   certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = aws_route53_record.dns.*.fqdn
+  validation_record_fqdns = [for record in aws_route53_record.dns : record.fqdn]
+  depends_on = [
+    aws_acm_certificate.cert,
+    aws_route53_record.dns
+  ]
 }
